@@ -2,7 +2,7 @@
 
 FlexStep AI is a Codex-built wellness web app that helps users explore gentle mobility, foot-strength, balance, and lower-limb movement routines.
 
-**Live demo:** https://rkhmbv.github.io/flexstep/
+**Live demo:** https://alina-rakhimbaeva-2027.github.io/flexstep/
 
 **What it demonstrates**
 
