@@ -10,7 +10,544 @@
       href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;700&family=Manrope:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="./styles.css" />
+    <style>
+:root {
+  --bg: #f6efe3;
+  --bg-strong: #f0e1c7;
+  --surface: rgba(255, 250, 242, 0.78);
+  --surface-strong: #fff8f0;
+  --ink: #1f2a1f;
+  --muted: #576257;
+  --line: rgba(31, 42, 31, 0.12);
+  --accent: #1b6b5b;
+  --accent-soft: #dff1eb;
+  --sun: #de7f3f;
+  --shadow: 0 24px 80px rgba(82, 52, 23, 0.12);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: "Manrope", sans-serif;
+  color: var(--ink);
+  background:
+    radial-gradient(circle at top left, rgba(255, 255, 255, 0.75), transparent 32%),
+    linear-gradient(180deg, #f8f1e6 0%, #f4ead9 42%, #efe5d5 100%);
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.18) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.14) 1px, transparent 1px);
+  background-size: 32px 32px;
+  mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.22), transparent 72%);
+}
+
+.page-shell {
+  width: min(1160px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 24px 0 64px;
+}
+
+.hero,
+.builder-card,
+.exercise-card,
+.disclaimer,
+.dashboard-card {
+  backdrop-filter: blur(18px);
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: 1.4fr 0.9fr;
+  gap: 28px;
+  padding: 28px;
+  border: 1px solid var(--line);
+  border-radius: 32px;
+  background: linear-gradient(145deg, rgba(255, 248, 240, 0.92), rgba(255, 243, 225, 0.64));
+  box-shadow: var(--shadow);
+  animation: rise-in 0.7s ease both;
+}
+
+.topbar {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.brand-mark,
+.topbar-note,
+.eyebrow,
+.panel-label,
+.routine-label,
+.card-category,
+dt {
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.78rem;
+}
+
+.brand-mark,
+.panel-label,
+.routine-label,
+.card-category,
+dt {
+  color: var(--accent);
+}
+
+.topbar-note,
+.eyebrow {
+  color: var(--muted);
+}
+
+.hero h1,
+.hero h2,
+.section-copy h2,
+.card-title {
+  font-family: "Fraunces", serif;
+  line-height: 1.02;
+  margin: 0;
+}
+
+.hero h1 {
+  font-size: clamp(3rem, 7vw, 5.8rem);
+  max-width: 11ch;
+}
+
+.hero-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.hero-text,
+.section-copy p,
+.card-summary,
+.card-details dd,
+.disclaimer p,
+#focus-description {
+  color: var(--muted);
+  line-height: 1.65;
+  margin: 0;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 20px;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 700;
+  transition: transform 180ms ease, background-color 180ms ease;
+}
+
+.button:hover,
+.filter-chip:hover {
+  transform: translateY(-2px);
+}
+
+.button-primary {
+  background: var(--ink);
+  color: #fffdf8;
+}
+
+.button-secondary {
+  background: rgba(255, 255, 255, 0.55);
+  color: var(--ink);
+  border: 1px solid var(--line);
+}
+
+.hero-panel,
+.builder-card,
+.exercise-card,
+.disclaimer,
+.dashboard-card {
+  border: 1px solid var(--line);
+  border-radius: 28px;
+  background: var(--surface);
+}
+
+.hero-panel {
+  padding: 24px;
+  align-self: end;
+  background:
+    linear-gradient(160deg, rgba(223, 241, 235, 0.92), rgba(255, 247, 233, 0.78)),
+    var(--surface);
+}
+
+.hero-panel h2 {
+  font-size: clamp(2rem, 4vw, 3rem);
+  margin: 10px 0 14px;
+}
+
+.focus-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.focus-tags span,
+.card-level,
+.filter-chip {
+  border-radius: 999px;
+  padding: 9px 14px;
+  font-size: 0.92rem;
+}
+
+.focus-tags span,
+.card-level {
+  background: rgba(255, 255, 255, 0.68);
+  color: var(--ink);
+}
+
+.dashboard-grid,
+.disclaimer,
+.section-grid,
+.card-grid {
+  margin-top: 24px;
+}
+
+.disclaimer {
+  padding: 16px 20px;
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr 1.15fr;
+  gap: 18px;
+}
+
+.dashboard-card {
+  padding: 22px;
+  box-shadow: var(--shadow);
+}
+
+.dashboard-card h2 {
+  font-family: "Fraunces", serif;
+  font-size: clamp(1.8rem, 3vw, 2.8rem);
+  margin: 8px 0 12px;
+  line-height: 1.08;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.stat-block {
+  padding: 16px;
+  border-radius: 22px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.82), rgba(223, 241, 235, 0.58));
+  display: grid;
+  gap: 6px;
+}
+
+.stat-value {
+  font-family: "Fraunces", serif;
+  font-size: 2.3rem;
+}
+
+.stat-label,
+.spotify-status {
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+.milestone-list {
+  display: grid;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.milestone-item {
+  padding: 14px 16px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid var(--line);
+}
+
+.milestone-item.complete {
+  background: linear-gradient(180deg, rgba(223, 241, 235, 0.92), rgba(255, 255, 255, 0.88));
+  border-color: rgba(27, 107, 91, 0.25);
+}
+
+.milestone-item strong,
+.card-goals span {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+}
+
+.milestone-item p {
+  margin: 6px 0 0;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.spotify-card {
+  background:
+    linear-gradient(145deg, rgba(20, 68, 56, 0.94), rgba(34, 117, 81, 0.84)),
+    var(--surface);
+  color: #f8f6f0;
+}
+
+.spotify-card .eyebrow,
+.spotify-card .spotify-status {
+  color: rgba(248, 246, 240, 0.76);
+}
+
+.spotify-card .button-primary {
+  background: #f8f6f0;
+  color: #12342f;
+}
+
+.spotify-card .button-secondary {
+  background: rgba(248, 246, 240, 0.08);
+  color: #f8f6f0;
+  border-color: rgba(248, 246, 240, 0.18);
+}
+
+.spotify-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 18px 0;
+}
+
+.embed-shell {
+  border-radius: 24px;
+  overflow: hidden;
+  border: 1px solid rgba(248, 246, 240, 0.12);
+}
+
+.embed-shell iframe {
+  width: 100%;
+  height: 352px;
+  border: 0;
+  display: block;
+}
+
+.section-grid {
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  gap: 24px;
+  align-items: start;
+}
+
+.section-copy {
+  padding: 10px 4px 0;
+}
+
+.section-copy h2 {
+  font-size: clamp(2rem, 4vw, 3.3rem);
+  margin-bottom: 14px;
+}
+
+.builder-card {
+  padding: 22px;
+  box-shadow: var(--shadow);
+}
+
+.toggle-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.filter-chip {
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.78);
+  color: var(--ink);
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 180ms ease, background-color 180ms ease, color 180ms ease, border-color 180ms ease;
+}
+
+.filter-chip.active {
+  background: var(--accent);
+  color: white;
+  border-color: var(--accent);
+}
+
+.routine-output {
+  margin-top: 24px;
+  padding: 18px;
+  border-radius: 20px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.82), rgba(255, 249, 240, 0.7));
+}
+
+.routine-output ul {
+  list-style: none;
+  padding: 0;
+  margin: 16px 0 0;
+  display: grid;
+  gap: 12px;
+}
+
+.routine-output li {
+  display: grid;
+  gap: 4px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--line);
+}
+
+.routine-output li:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+
+.routine-output strong {
+  font-size: 1.05rem;
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.exercise-card {
+  padding: 20px;
+  display: grid;
+  gap: 16px;
+  animation: rise-in 0.5s ease both;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: center;
+}
+
+.card-title {
+  font-size: 1.75rem;
+}
+
+.card-goals {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.card-goals span {
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-size: 0.9rem;
+}
+
+.card-details {
+  display: grid;
+  gap: 12px;
+  margin: 0;
+}
+
+.card-details div {
+  padding-top: 12px;
+  border-top: 1px solid var(--line);
+}
+
+.card-details dd {
+  margin: 8px 0 0;
+}
+
+.complete-button {
+  margin-top: auto;
+}
+
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 920px) {
+  .hero,
+  .dashboard-grid,
+  .section-grid,
+  .card-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero h1 {
+    max-width: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .page-shell {
+    width: min(100% - 20px, 1160px);
+    padding-top: 12px;
+  }
+
+  .hero,
+  .builder-card,
+  .exercise-card,
+  .disclaimer {
+    border-radius: 24px;
+  }
+
+  .hero,
+  .builder-card {
+    padding: 18px;
+  }
+
+  .topbar {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .hero-actions,
+  .toggle-row,
+  .spotify-actions {
+    flex-direction: column;
+  }
+
+  .button,
+  .filter-chip {
+    width: 100%;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+    </style>
   </head>
   <body>
     <div class="page-shell">
@@ -177,6 +714,419 @@
       </article>
     </template>
 
-    <script src="./app.js"></script>
+    <script>
+const exercises = [
+  {
+    id: "tennis-ball-roll",
+    title: "Tennis Ball Foot Roll",
+    category: "Foot release",
+    level: "Beginner",
+    equipment: "Tennis ball",
+    dose: "1-2 minutes per foot",
+    why: "Can reduce plantar stiffness and improve tolerance for toe mobility work.",
+    summary:
+      "Roll slowly from heel to forefoot, then pause in tender spots without forcing pressure.",
+    goals: ["Pain relief", "Mobility"],
+  },
+  {
+    id: "toe-splay",
+    title: "Toe Splay Practice",
+    category: "Foot control",
+    level: "Beginner",
+    equipment: "None",
+    dose: "2 sets of 6-8 slow reps",
+    why: "Encourages intrinsic foot muscle control and awareness of big-toe position.",
+    summary:
+      "Spread the toes gently, keeping the big toe long rather than gripping the floor.",
+    goals: ["Foot strength", "Mobility"],
+  },
+  {
+    id: "short-foot",
+    title: "Short Foot Hold",
+    category: "Foot control",
+    level: "Intermediate",
+    equipment: "Chair or wall for balance",
+    dose: "3 sets of 20-second holds",
+    why: "Builds arch support without curling the toes, which may help distribute load better.",
+    summary:
+      "Draw the ball of the foot slightly toward the heel while keeping the toes relaxed.",
+    goals: ["Foot strength", "Balance"],
+  },
+  {
+    id: "ankle-dorsiflexion",
+    title: "Wall Ankle Dorsiflexion",
+    category: "Ankle mobility",
+    level: "Beginner",
+    equipment: "Wall",
+    dose: "2 sets of 8 reps per side",
+    why: "Improved ankle motion may reduce compensations through the forefoot and big toe.",
+    summary:
+      "Drive the knee toward the wall over the second toe while the heel stays grounded.",
+    goals: ["Mobility", "Walking comfort"],
+  },
+  {
+    id: "tibial-rotation",
+    title: "Seated Tibial Rotation",
+    category: "Knee mobility",
+    level: "Beginner",
+    equipment: "Chair",
+    dose: "2 sets of 8 reps per side",
+    why: "Helps coordinate shin rotation, which influences foot mechanics during gait.",
+    summary:
+      "Rotate the shin inward and outward gently while the foot stays light on the floor.",
+    goals: ["Mobility", "Walking comfort"],
+  },
+  {
+    id: "step-down",
+    title: "Supported Step-Down",
+    category: "Knee control",
+    level: "Intermediate",
+    equipment: "Low step, wall or rail",
+    dose: "2 sets of 6 reps per side",
+    why: "Builds knee tracking control so the foot is less likely to collapse inward.",
+    summary:
+      "Tap the heel down slowly and keep the knee stacked over the middle of the foot.",
+    goals: ["Balance", "Walking comfort"],
+  },
+  {
+    id: "hip-90-90",
+    title: "90/90 Hip Switch",
+    category: "Hip mobility",
+    level: "Beginner",
+    equipment: "Mat",
+    dose: "1-2 minutes",
+    why: "Hip rotation can affect how the knee and foot load during standing and walking.",
+    summary:
+      "Switch both knees side to side with control, staying tall through the torso.",
+    goals: ["Mobility", "Walking comfort"],
+  },
+  {
+    id: "hip-abduction",
+    title: "Side-Lying Hip Abduction",
+    category: "Hip strength",
+    level: "Beginner",
+    equipment: "Mat",
+    dose: "2 sets of 10 reps per side",
+    why: "Stronger lateral hip muscles can improve lower-limb alignment and balance.",
+    summary:
+      "Lift the top leg slightly behind you, keeping the pelvis stacked and steady.",
+    goals: ["Balance", "Walking comfort"],
+  },
+  {
+    id: "single-leg-balance",
+    title: "Single-Leg Balance Reach",
+    category: "Balance",
+    level: "Intermediate",
+    equipment: "Wall nearby",
+    dose: "3 rounds of 20 seconds per side",
+    why: "Challenges foot tripod control and whole-leg stability during stance.",
+    summary:
+      "Balance on one foot and reach the other leg lightly forward and to the side.",
+    goals: ["Balance", "Foot strength"],
+  },
+];
+
+const milestoneDefinitions = [
+  {
+    points: 60,
+    title: "First Foundation",
+    detail: "You have built the first layer of daily foot-care consistency.",
+  },
+  {
+    points: 180,
+    title: "Steady Support",
+    detail: "You are stacking enough reps to reinforce better movement habits.",
+  },
+  {
+    points: 360,
+    title: "Chain Builder",
+    detail: "Your practice now includes the foot, knee, and hip working together.",
+  },
+];
+
+const focusOptions = [
+  {
+    label: "Pain relief",
+    picks: ["tennis-ball-roll", "toe-splay", "ankle-dorsiflexion"],
+    title: "Foot release + gentle mobility",
+    description:
+      "Begin with calming soft-tissue work, then restore movement through the foot and ankle.",
+    playlistId: "37i9dQZF1DX3rxVfibe1L0",
+  },
+  {
+    label: "Mobility",
+    picks: ["tennis-ball-roll", "ankle-dorsiflexion", "hip-90-90", "tibial-rotation"],
+    title: "Foot and chain mobility",
+    description:
+      "This sequence opens the foot, ankle, shin, and hips so walking mechanics can feel less restricted.",
+    playlistId: "37i9dQZF1DX1s9knjP51Oa",
+  },
+  {
+    label: "Foot strength",
+    picks: ["toe-splay", "short-foot", "single-leg-balance"],
+    title: "Intrinsic foot control",
+    description:
+      "A short progression focused on arch support, toe awareness, and stance control.",
+    playlistId: "37i9dQZF1DX6VdMW310YC7",
+  },
+  {
+    label: "Balance",
+    picks: ["short-foot", "hip-abduction", "single-leg-balance", "step-down"],
+    title: "Stability from hip to foot",
+    description:
+      "Use this when you want more control through single-leg stance and knee tracking.",
+    playlistId: "37i9dQZF1DX8ymr6UES7vc",
+  },
+  {
+    label: "Walking comfort",
+    picks: ["ankle-dorsiflexion", "tibial-rotation", "hip-90-90", "step-down"],
+    title: "Walking mechanics support",
+    description:
+      "A chain-based routine for smoother roll-through and better lower-limb coordination.",
+    playlistId: "37i9dQZF1DX889U0CL85jj",
+  },
+];
+
+const spotifyConfig = {
+  clientId: "YOUR_SPOTIFY_CLIENT_ID",
+  scopes: ["user-read-email", "user-read-private", "streaming"],
+};
+
+const storageKey = "toe-align-progress";
+const spotifyStorageKey = "toe-align-spotify-connected";
+const today = new Date().toISOString().slice(0, 10);
+const categoryFilters = ["All", ...new Set(exercises.map((exercise) => exercise.category))];
+
+const categoryFiltersNode = document.querySelector("#category-filters");
+const goalFiltersNode = document.querySelector("#goal-filters");
+const cardsNode = document.querySelector("#exercise-cards");
+const routineListNode = document.querySelector("#routine-list");
+const pointsValueNode = document.querySelector("#points-value");
+const streakValueNode = document.querySelector("#streak-value");
+const sessionsValueNode = document.querySelector("#sessions-value");
+const milestoneListNode = document.querySelector("#milestone-list");
+const spotifyStatusNode = document.querySelector("#spotify-status");
+const spotifyConnectNode = document.querySelector("#spotify-connect");
+const spotifyOpenNode = document.querySelector("#spotify-open");
+const spotifyEmbedNode = document.querySelector("#spotify-embed");
+const template = document.querySelector("#exercise-card-template");
+const focusTitleNode = document.querySelector("#focus-title");
+const focusDescriptionNode = document.querySelector("#focus-description");
+
+let activeCategory = "All";
+let activeGoal = focusOptions[1].label;
+let progress = loadProgress();
+
+function loadProgress() {
+  const fallback = {
+    points: 0,
+    streak: 0,
+    sessionsCompleted: 0,
+    lastCompletionDate: null,
+    completedByDate: {},
+  };
+
+  try {
+    const saved = JSON.parse(localStorage.getItem(storageKey));
+    return { ...fallback, ...saved };
+  } catch {
+    return fallback;
+  }
+}
+
+function saveProgress() {
+  localStorage.setItem(storageKey, JSON.stringify(progress));
+}
+
+function renderChips(container, options, activeValue, onClick) {
+  container.innerHTML = "";
+
+  options.forEach((option) => {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = `filter-chip${option === activeValue ? " active" : ""}`;
+    button.textContent = option;
+    button.addEventListener("click", () => onClick(option));
+    container.appendChild(button);
+  });
+}
+
+function updateProgress(exerciseId) {
+  const completedToday = new Set(progress.completedByDate[today] ?? []);
+  const firstExerciseToday = completedToday.size === 0;
+  const isNewExerciseToday = !completedToday.has(exerciseId);
+
+  if (isNewExerciseToday) {
+    progress.points += 15;
+    completedToday.add(exerciseId);
+    progress.completedByDate[today] = Array.from(completedToday);
+  } else {
+    progress.points += 5;
+  }
+
+  if (firstExerciseToday) {
+    progress.sessionsCompleted += 1;
+
+    if (!progress.lastCompletionDate) {
+      progress.streak = 1;
+    } else {
+      const previousDate = new Date(progress.lastCompletionDate);
+      const currentDate = new Date(today);
+      const dayGap = Math.round((currentDate - previousDate) / 86400000);
+
+      if (dayGap === 1) {
+        progress.streak += 1;
+      } else if (dayGap > 1) {
+        progress.streak = 1;
+      }
+    }
+
+    progress.lastCompletionDate = today;
+  }
+
+  saveProgress();
+  renderDashboard();
+}
+
+function renderDashboard() {
+  pointsValueNode.textContent = progress.points;
+  streakValueNode.textContent = progress.streak;
+  sessionsValueNode.textContent = progress.sessionsCompleted;
+  milestoneListNode.innerHTML = "";
+
+  milestoneDefinitions.forEach((milestone) => {
+    const complete = progress.points >= milestone.points;
+    const remainingPoints = Math.max(milestone.points - progress.points, 0);
+    const item = document.createElement("article");
+    item.className = `milestone-item${complete ? " complete" : ""}`;
+    item.innerHTML = `
+      <strong>${complete ? "Unlocked" : `${remainingPoints} pts to go`} · ${milestone.title}</strong>
+      <p>${milestone.detail}</p>
+    `;
+    milestoneListNode.appendChild(item);
+  });
+}
+
+function renderCards() {
+  cardsNode.innerHTML = "";
+
+  const filteredExercises = exercises.filter((exercise) => {
+    const categoryMatch = activeCategory === "All" || exercise.category === activeCategory;
+    const goalMatch = exercise.goals.includes(activeGoal);
+    return categoryMatch && goalMatch;
+  });
+
+  const visibleExercises =
+    filteredExercises.length > 0
+      ? filteredExercises
+      : exercises.filter(
+          (exercise) => activeCategory === "All" || exercise.category === activeCategory,
+        );
+
+  visibleExercises.forEach((exercise, index) => {
+    const card = template.content.firstElementChild.cloneNode(true);
+    const goalsNode = card.querySelector(".card-goals");
+
+    card.style.animationDelay = `${index * 70}ms`;
+    card.querySelector(".card-category").textContent = exercise.category;
+    card.querySelector(".card-level").textContent = exercise.level;
+    card.querySelector(".card-title").textContent = exercise.title;
+    card.querySelector(".card-summary").textContent = exercise.summary;
+    card.querySelector(".card-why").textContent = exercise.why;
+    card.querySelector(".card-dose").textContent = exercise.dose;
+    card.querySelector(".card-equipment").textContent = exercise.equipment;
+
+    exercise.goals.forEach((goal) => {
+      const tag = document.createElement("span");
+      tag.textContent = goal;
+      goalsNode.appendChild(tag);
+    });
+
+    card.querySelector(".complete-button").addEventListener("click", () => {
+      updateProgress(exercise.id);
+    });
+
+    cardsNode.appendChild(card);
+  });
+}
+
+function renderRoutine() {
+  const selectedFocus = focusOptions.find((option) => option.label === activeGoal) ?? focusOptions[0];
+  focusTitleNode.textContent = selectedFocus.title;
+  focusDescriptionNode.textContent = selectedFocus.description;
+  routineListNode.innerHTML = "";
+
+  selectedFocus.picks
+    .map((id) => exercises.find((exercise) => exercise.id === id))
+    .filter(Boolean)
+    .forEach((exercise) => {
+      const item = document.createElement("li");
+      item.innerHTML = `
+        <strong>${exercise.title}</strong>
+        <span>${exercise.dose}</span>
+        <span>${exercise.summary}</span>
+      `;
+      routineListNode.appendChild(item);
+    });
+}
+
+function renderSpotify() {
+  const selectedFocus = focusOptions.find((option) => option.label === activeGoal) ?? focusOptions[0];
+  const embedUrl = `https://open.spotify.com/embed/playlist/${selectedFocus.playlistId}?utm_source=generator`;
+  const openUrl = `https://open.spotify.com/playlist/${selectedFocus.playlistId}`;
+  const spotifyAuthorized = localStorage.getItem(spotifyStorageKey) === "true";
+
+  spotifyEmbedNode.src = embedUrl;
+  spotifyOpenNode.href = openUrl;
+  spotifyStatusNode.textContent = spotifyAuthorized
+    ? `Spotify is marked connected. Current playlist matches your ${activeGoal.toLowerCase()} focus.`
+    : "Spotify auth is scaffolded. Add your client ID in this file to turn the connect button into OAuth, or use the embedded playlist now.";
+}
+
+function setCategory(option) {
+  activeCategory = option;
+  renderChips(categoryFiltersNode, categoryFilters, activeCategory, setCategory);
+  renderCards();
+}
+
+function setGoal(option) {
+  activeGoal = option;
+  renderChips(goalFiltersNode, focusOptions.map((item) => item.label), activeGoal, setGoal);
+  renderRoutine();
+  renderCards();
+  renderSpotify();
+}
+
+function connectSpotify() {
+  if (spotifyConfig.clientId === "YOUR_SPOTIFY_CLIENT_ID") {
+    spotifyStatusNode.textContent =
+      "Add your Spotify app client ID in this file to enable OAuth. The embedded playlist is already working without login.";
+    return;
+  }
+
+  const redirectUri = window.location.href;
+  const authUrl = new URL("https://accounts.spotify.com/authorize");
+  authUrl.searchParams.set("client_id", spotifyConfig.clientId);
+  authUrl.searchParams.set("response_type", "token");
+  authUrl.searchParams.set("redirect_uri", redirectUri);
+  authUrl.searchParams.set("scope", spotifyConfig.scopes.join(" "));
+  window.location.href = authUrl.toString();
+}
+
+if (window.location.hash.includes("access_token")) {
+  localStorage.setItem(spotifyStorageKey, "true");
+  history.replaceState({}, document.title, window.location.pathname);
+}
+
+spotifyConnectNode.addEventListener("click", connectSpotify);
+
+renderChips(categoryFiltersNode, categoryFilters, activeCategory, setCategory);
+renderChips(goalFiltersNode, focusOptions.map((option) => option.label), activeGoal, setGoal);
+renderDashboard();
+renderRoutine();
+renderCards();
+renderSpotify();
+
+    </script>
   </body>
 </html>
