@@ -15,7 +15,7 @@ FlexStep AI is a Codex-built wellness web app that helps users explore gentle mo
 
 **Built with**
 
-HTML · CSS · JavaScript · GitHub Pages · Codex AI
+Codex AI · HTML · CSS · JavaScript · GitHub Pages
 
 **Run locally**
 
