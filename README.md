@@ -1,37 +1,26 @@
-# Toe Align
+# FlexStep AI
 
-Lightweight hallux valgus exercise app built as a static single-page site.
+FlexStep AI is a Codex-built wellness web app that helps users explore gentle mobility, foot-strength, balance, and lower-limb movement routines.
 
-## Open it
+**Live demo:** https://rkhmbv.github.io/flexstep/
 
-Open `/Users/rakhimbai/Documents/New project/index.html` in a browser.
+**What it demonstrates**
 
-## Deploy to GitHub Pages
+- A responsive single-page interface built with HTML, CSS, and JavaScript
+- Goal-based routine recommendations for pain relief, mobility, foot strength, balance, and walking comfort
+- Exercise filtering across the foot, ankle, knee, hip, and balance system
+- Progress tracking with points, streaks, sessions, and milestones using browser local storage
+- Spotify playlist pairing for focused exercise sessions
+- GitHub Pages deployment through GitHub Actions
 
-This repo includes `/Users/rakhimbai/Documents/New project/.github/workflows/deploy-pages.yml` so GitHub can deploy the static site automatically from the `main` branch.
+**Built with**
 
-After the repo is pushed to GitHub:
+HTML · CSS · JavaScript · GitHub Pages · Codex AI
 
-1. Open the repository on GitHub.
-2. Go to `Settings` -> `Pages`.
-3. Set the source to `GitHub Actions`.
-4. Push to `main` or rerun the `Deploy GitHub Pages` workflow.
+**Run locally**
 
-Your live URL will be:
+Open index.html in a browser.
 
-`https://<github-username>.github.io/<repo-name>/`
+**Safety note**
 
-## What it includes
-
-- A hallux valgus-focused landing page
-- Exercise categories across foot, ankle, knee, hip, and balance work
-- Goal filters for pain relief, mobility, foot strength, balance, and walking comfort
-- A simple session builder that suggests a short routine
-- Persistent points, day streaks, and milestone tracking with `localStorage`
-- Spotify playlist pairing, plus a placeholder OAuth connect flow
-
-## Notes
-
-This project is educational and should not replace personalized medical care.
-
-To enable Spotify OAuth, replace `YOUR_SPOTIFY_CLIENT_ID` in `/Users/rakhimbai/Documents/New project/app.js` with your Spotify app client ID.
+This project is for educational purposes and does not replace personalized medical care. Stop if pain increases and consult a qualified clinician for individual guidance.
